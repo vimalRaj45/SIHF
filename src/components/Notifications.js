@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import API from "../api/api";
+import API from "../api/api"; // Axios instance with ngrok header
 
 export default function Notifications() {
   const [notifications, setNotifications] = useState([]);
@@ -16,14 +16,13 @@ export default function Notifications() {
 
   const fetchNotifications = useCallback(async () => {
     setLoading(true);
-     try {
+    try {
       const params = {};
       if (search) params.search = search;
       if (filterUser) params.user = filterUser;
       if (filterClass) params.classification = filterClass;
       if (filterDate) params.date = filterDate;
 
-      // Use Axios with ngrok header
       const res = await API.get("/notifications", { params });
       setNotifications(res.data);
     } catch (err) {
@@ -124,15 +123,17 @@ export default function Notifications() {
                   <p className="mb-1"><strong>Summary:</strong> {note.summary}</p>
                   <p className="mb-3"><strong>Uploaded At:</strong> {new Date(note.created_at).toLocaleString()}</p>
 
+                  {/* Document Preview */}
                   <div className="ratio ratio-16x9 mb-3">
                     <iframe
-                      src={"http://localhost:5000" + note.file_url}
+                      src={API.defaults.baseURL + note.file_url} // use ngrok URL
                       title={note.filename}
                       style={{ border: "1px solid #ccc" }}
                     />
                   </div>
+
                   <a
-                    href={"http://localhost:5000" + note.file_url}
+                    href={API.defaults.baseURL + note.file_url} // use ngrok URL
                     target="_blank"
                     rel="noopener noreferrer"
                     className="btn btn-sm btn-primary"
