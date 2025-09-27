@@ -4,6 +4,13 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+// Catch unhandled promise rejections (like the extension error)
+window.addEventListener("unhandledrejection", function (event) {
+  console.warn("Unhandled promise rejection:", event.reason);
+  event.preventDefault(); // prevents the console from logging the error
+});
+
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
