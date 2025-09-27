@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useCallback } from "react";
 import Swal from "sweetalert2";
+import API from "../api/api";
 
 export default function EmailList() {
   const [emails, setEmails] = useState([]);
@@ -21,14 +22,13 @@ export default function EmailList() {
     return "Other";
   };
 
-  // Fetch emails with useCallback to satisfy ESLint
+  // Fetch emails using Axios and Ngrok header
   const fetchEmails = useCallback(async () => {
     try {
       setLoading(true);
-      const res = await fetch("http://127.0.0.1:5000/last_emails");
-      const data = await res.json();
-      if (data.emails) {
-        const categorized = data.emails.map((email) => ({
+      const res = await API.get("/last_emails");
+      if (res.data.emails) {
+        const categorized = res.data.emails.map((email) => ({
           ...email,
           category: categorizeEmail(email),
         }));
