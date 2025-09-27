@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import API from "../api/api";
 
 export default function Notifications() {
   const [notifications, setNotifications] = useState([]);
@@ -15,16 +16,16 @@ export default function Notifications() {
 
   const fetchNotifications = useCallback(async () => {
     setLoading(true);
-    try {
-      const params = new URLSearchParams();
-      if (search) params.append("search", search);
-      if (filterUser) params.append("user", filterUser);
-      if (filterClass) params.append("classification", filterClass);
-      if (filterDate) params.append("date", filterDate);
+     try {
+      const params = {};
+      if (search) params.search = search;
+      if (filterUser) params.user = filterUser;
+      if (filterClass) params.classification = filterClass;
+      if (filterDate) params.date = filterDate;
 
-      const res = await fetch("http://localhost:5000/notifications?" + params.toString());
-      const data = await res.json();
-      setNotifications(data);
+      // Use Axios with ngrok header
+      const res = await API.get("/notifications", { params });
+      setNotifications(res.data);
     } catch (err) {
       console.error(err);
       Swal.fire("Error", "Failed to fetch notifications", "error");
