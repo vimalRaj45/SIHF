@@ -1,21 +1,21 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "KMRCL Docs",
+  "name": "KMRCL APP",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "https://i.ibb.co/FLDn7FR7/Chat-GPT-Image-Sep-28-2025-11-10-20-AM.png",
       "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "type": "image/png"
     },
     {
-      "src": "logo192.png",
-      "type": "image/png",
-      "sizes": "192x192"
+      "src": "https://i.ibb.co/FLDn7FR7/Chat-GPT-Image-Sep-28-2025-11-10-20-AM.png",
+      "sizes": "192x192",
+      "type": "image/png"
     },
     {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
+      "src": "https://i.ibb.co/FLDn7FR7/Chat-GPT-Image-Sep-28-2025-11-10-20-AM.png",
+      "sizes": "512x512",
+      "type": "image/png"
     }
   ],
   "start_url": ".",
